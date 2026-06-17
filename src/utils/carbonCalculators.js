@@ -28,7 +28,7 @@ export const calculateFootprint = (answers) => {
   const commuteMode     = answers.commuteMode || 'Gas Car';
   const distanceMiles   = Number(answers.commuteDistance) || 0;
   const distanceKm      = distanceMiles * MILES_TO_KM;
-  const officeDays      = Number(answers.officeDays) ?? 3;
+  const officeDays      = answers.officeDays !== undefined ? Number(answers.officeDays) : 3;
   const commuteDaysPerYear = officeDays * WEEKS_PER_YEAR;
   const factorPerKm     = COMMUTE_FACTORS_PER_KM[commuteMode] ?? 0.192;
   // Round trip is already baked into commuteDistance (user enters round-trip)

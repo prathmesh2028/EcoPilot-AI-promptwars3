@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { useEco } from '../context/EcoContext';
 import { generateCarbonTwin } from '../services/gemini';
@@ -47,11 +47,19 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (!userData || aiCache.twin) return;
-    setTwinLoading(true);
-    generateCarbonTwin(userData, carbonMetrics)
-      .then(t => { setTwin(t); updateAiCache('twin', t); })
-      .finally(() => setTwinLoading(false));
-  }, [userData]);
+    const fetchTwin = async () => {
+      setTwinLoading(true);
+      try {
+        const t = await generateCarbonTwin(userData, carbonMetrics);
+        setTwin(t);
+        updateAiCache('twin', t);
+      } finally {
+        setTwinLoading(false);
+      }
+    };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchTwin();
+  }, [userData, carbonMetrics, aiCache.twin, updateAiCache]);
 
   if (!hasCompletedAssessment) return <Navigate to="/assessment" replace />;
 

@@ -99,7 +99,10 @@ export const Report = () => {
     }
   };
 
-  useEffect(() => { fetchReport(); }, [userData]);
+  useEffect(() => { 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchReport(); 
+  }, [userData]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
   if (!hasCompletedAssessment) return <Navigate to="/assessment" replace />;
 

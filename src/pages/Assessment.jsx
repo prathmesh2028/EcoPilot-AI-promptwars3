@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEco } from '../context/EcoContext';
-import { ChevronRight, ChevronLeft, CheckCircle2, Leaf } from 'lucide-react';
+import { ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react';
 
 const QUESTIONS = [
   {
     id: 'commuteMode',
-    step: 1,
     title: 'How do you get to work?',
     description: 'Your primary commute method on office days.',
     type: 'choice',
@@ -20,7 +19,6 @@ const QUESTIONS = [
   },
   {
     id: 'commuteDistance',
-    step: 2,
     title: 'Round-trip commute distance?',
     description: 'Total miles per day, door to door.',
     type: 'slider',
@@ -29,7 +27,6 @@ const QUESTIONS = [
   },
   {
     id: 'officeDays',
-    step: 3,
     title: 'How many days in office per week?',
     description: 'Average over the past month.',
     type: 'slider',
@@ -38,7 +35,6 @@ const QUESTIONS = [
   },
   {
     id: 'foodLifestyle',
-    step: 4,
     title: 'What best describes your diet?',
     description: 'Food production accounts for ~26% of global emissions.',
     type: 'choice',
@@ -53,7 +49,6 @@ const QUESTIONS = [
   },
   {
     id: 'lifestylePattern',
-    step: 5,
     title: 'General lifestyle intensity?',
     description: 'Flights, online orders, home energy, and consumer goods.',
     type: 'choice',
