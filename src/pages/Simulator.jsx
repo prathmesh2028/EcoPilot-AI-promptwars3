@@ -27,6 +27,13 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
+/**
+ * Simulator Page Component
+ * 
+ * Provides an interactive interface for users to adjust their lifestyle variables
+ * and instantly see the deterministic projected impact on their carbon footprint
+ * via Recharts visualisations. Does not use AI for mathematical calculations.
+ */
 export const Simulator = () => {
   const { userData, carbonMetrics, hasCompletedAssessment } = useEco();
 
@@ -103,10 +110,11 @@ export const Simulator = () => {
               {/* Office days */}
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <label className="text-sm font-semibold text-white">Office Days / Week</label>
+                  <label htmlFor="sim-office" className="text-sm font-semibold text-white">Office Days / Week</label>
                   <span className="text-base font-black text-emerald-400 font-mono">{sim.officeDays}</span>
                 </div>
                 <input
+                  id="sim-office"
                   type="range" min={0} max={7} step={1}
                   value={sim.officeDays ?? 3}
                   onChange={e => setSField('officeDays', Number(e.target.value))}
@@ -122,10 +130,11 @@ export const Simulator = () => {
               {/* Commute distance */}
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <label className="text-sm font-semibold text-white">Commute Distance</label>
+                  <label htmlFor="sim-distance" className="text-sm font-semibold text-white">Commute Distance</label>
                   <span className="text-base font-black text-emerald-400 font-mono">{sim.commuteDistance} mi</span>
                 </div>
                 <input
+                  id="sim-distance"
                   type="range" min={0} max={120} step={5}
                   value={sim.commuteDistance ?? 20}
                   onChange={e => setSField('commuteDistance', Number(e.target.value))}
@@ -137,8 +146,9 @@ export const Simulator = () => {
 
               {/* Commute mode */}
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-white block">Commute Mode</label>
+                <label htmlFor="sim-mode" className="text-sm font-semibold text-white block">Commute Mode</label>
                 <select
+                  id="sim-mode"
                   value={sim.commuteMode}
                   onChange={e => setSField('commuteMode', e.target.value)}
                   className="input-dark"
@@ -149,8 +159,9 @@ export const Simulator = () => {
 
               {/* Diet */}
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-white block">Diet</label>
+                <label htmlFor="sim-diet" className="text-sm font-semibold text-white block">Diet</label>
                 <select
+                  id="sim-diet"
                   value={sim.foodLifestyle}
                   onChange={e => setSField('foodLifestyle', e.target.value)}
                   className="input-dark"
@@ -161,8 +172,9 @@ export const Simulator = () => {
 
               {/* Lifestyle */}
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-white block">Lifestyle Intensity</label>
+                <label htmlFor="sim-lifestyle" className="text-sm font-semibold text-white block">Lifestyle Intensity</label>
                 <select
+                  id="sim-lifestyle"
                   value={sim.lifestylePattern}
                   onChange={e => setSField('lifestylePattern', e.target.value)}
                   className="input-dark"

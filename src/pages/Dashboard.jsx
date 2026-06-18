@@ -40,6 +40,13 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
+/**
+ * Dashboard Page Component
+ * 
+ * The main user interface for the application. Displays the user's carbon footprint
+ * dynamically using Recharts, their AI Carbon Twin, and benchmarking statistics.
+ * Persists data via the EcoContext.
+ */
 export const Dashboard = () => {
   const { userData, carbonMetrics, impactLevel, meterValue, comparisonStats, hasCompletedAssessment, aiCache, updateAiCache } = useEco();
   const [twin, setTwin]         = useState(aiCache.twin || null);

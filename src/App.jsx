@@ -9,6 +9,12 @@ import { ActionPlan } from './pages/ActionPlan';
 import { Simulator }  from './pages/Simulator';
 import { Report }     from './pages/Report';
 
+/**
+ * App Component
+ * 
+ * Root component of the EcoPilot application. Handles the routing hierarchy,
+ * global context providers, and layout composition.
+ */
 function App() {
   return (
     <EcoProvider>

@@ -76,6 +76,12 @@ const renderInline = (text) => {
   );
 };
 
+/**
+ * Report Page Component
+ * 
+ * Fetches and displays a full markdown-formatted Executive Sustainability Report
+ * from the Gemini AI service. Includes native print capabilities for PDF export.
+ */
 export const Report = () => {
   const { userData, carbonMetrics, hasCompletedAssessment, aiCache, updateAiCache } = useEco();
   const [reportText, setReportText] = useState(aiCache.report || '');

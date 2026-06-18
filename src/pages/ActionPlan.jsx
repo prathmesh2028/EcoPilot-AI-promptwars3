@@ -17,6 +17,13 @@ const SkeletonCard = () => (
   </div>
 );
 
+/**
+ * Action Plan Page Component
+ * 
+ * Interacts with the Gemini AI service to dynamically generate hyper-personalized
+ * recommendations and weekly challenges for the user based on their specific
+ * footprint and lifestyle profile.
+ */
 export const ActionPlan = () => {
   const {
     userData, carbonMetrics, hasCompletedAssessment,
