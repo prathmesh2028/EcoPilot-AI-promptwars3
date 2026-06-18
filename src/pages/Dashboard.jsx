@@ -57,7 +57,6 @@ export const Dashboard = () => {
         setTwinLoading(false);
       }
     };
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTwin();
   }, [userData, carbonMetrics, aiCache.twin, updateAiCache]);
 
@@ -78,8 +77,11 @@ export const Dashboard = () => {
         {/* ── Page header ────────────────────────────────── */}
         <div className="flex items-end justify-between pb-6 border-b border-white/5 animate-fade-in-up">
           <div>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight">Dashboard</h1>
-            <p className="text-slate-500 text-sm mt-1">Your personal carbon intelligence overview.</p>
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">Understand & Track Your Footprint</h1>
+            <div className="flex items-center gap-3 mt-2">
+              <p className="text-slate-500 text-sm">Your personal carbon intelligence overview.</p>
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">HISTORICAL TRACKING ACTIVE</span>
+            </div>
           </div>
           <Link to="/action-plan" className="btn-primary text-sm hidden sm:inline-flex">
             Get AI Plan <ArrowRight className="h-4 w-4" />

@@ -3,7 +3,6 @@
  * Props: twin { name, archetype, tagline, topCategory, strengths, opportunities }
  *        isLoading: boolean
  */
-import React from 'react';
 import { Sparkles, TrendingUp, Zap } from 'lucide-react';
 
 const ARCHETYPE_ICONS = {

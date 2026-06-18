@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Leaf, Menu, X, ArrowRight, RotateCcw } from 'lucide-react';
 import { useEco } from '../../context/EcoContext';
@@ -78,6 +78,7 @@ export const Layout = () => {
               {showNav && hasCompletedAssessment && (
                 <button
                   onClick={handleReset}
+                  aria-label="Reset assessment"
                   title="Reset assessment"
                   className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 text-xs font-medium transition-all"
                 >
@@ -88,6 +89,7 @@ export const Layout = () => {
               {showNav && (
                 <button
                   onClick={() => setMenuOpen(v => !v)}
+                  aria-label="Toggle mobile menu"
                   className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
                 >
                   {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -120,6 +122,7 @@ export const Layout = () => {
               })}
               <button
                 onClick={() => { setMenuOpen(false); handleReset(); }}
+                aria-label="Reset Profile"
                 className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium text-rose-400 hover:bg-rose-500/10 transition-colors"
               >
                 Reset Profile

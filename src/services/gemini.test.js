@@ -1,19 +1,20 @@
 import { describe, it, expect, vi } from 'vitest';
 import { generateCarbonTwin, generateSustainabilityReport, generateChallenges } from './gemini';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Mock the AI service
 vi.mock('@google/generative-ai', () => {
   return {
-    GoogleGenerativeAI: vi.fn().mockImplementation(() => ({
-      getGenerativeModel: vi.fn().mockReturnValue({
-        generateContent: vi.fn().mockResolvedValue({
-          response: {
-            text: vi.fn().mockReturnValue('MOCK_AI_RESPONSE')
-          }
-        })
-      })
-    }))
+    GoogleGenerativeAI: class {
+      getGenerativeModel() {
+        return {
+          generateContent: vi.fn().mockResolvedValue({
+            response: {
+              text: vi.fn().mockReturnValue('MOCK_AI_RESPONSE')
+            }
+          })
+        };
+      }
+    }
   };
 });
 

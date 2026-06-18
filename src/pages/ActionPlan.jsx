@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useEco } from '../context/EcoContext';
 import { generateRecommendations, generateChallenges } from '../services/gemini';
@@ -29,7 +29,7 @@ export const ActionPlan = () => {
   const [loadingChall, setLoadingChall]  = useState(false);
   const [activeTab, setActiveTab] = useState('recommendations');
 
-  const fetchAll = async (force = false) => {
+  const fetchAll = useCallback(async (force = false) => {
     if (!userData) return;
     if (!aiCache.recs || force) {
       setLoadingRecs(true);
@@ -43,9 +43,10 @@ export const ActionPlan = () => {
         .then(c => { setChallenges(c); updateAiCache('challenges', c); })
         .finally(() => setLoadingChall(false));
     }
-  };
+  }, [userData, aiCache.recs, aiCache.challenges, carbonMetrics, updateAiCache]);
 
-  useEffect(() => { fetchAll(); }, [userData]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { fetchAll(); }, [fetchAll]);
 
   if (!hasCompletedAssessment) return <Navigate to="/assessment" replace />;
 
@@ -64,9 +65,9 @@ export const ActionPlan = () => {
               <div className="h-8 w-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                 <Sparkles className="h-4 w-4 text-emerald-400" />
               </div>
-              <h1 className="text-3xl font-extrabold text-white tracking-tight">AI Action Plan</h1>
+              <h1 className="text-3xl font-extrabold text-white tracking-tight">Reduce Your Impact</h1>
             </div>
-            <p className="text-slate-500 text-sm">Gemini-generated insights tailored to your exact carbon profile.</p>
+            <p className="text-slate-500 text-sm">Gemini-generated AI recommendations tailored to help you understand and reduce your carbon footprint.</p>
           </div>
           <div className="flex items-center gap-3">
             {recs && (
@@ -76,6 +77,7 @@ export const ActionPlan = () => {
             )}
             <button
               onClick={() => fetchAll(true)}
+              aria-label="Refresh AI Recommendations"
               className="btn-ghost text-sm gap-2"
               title="Regenerate with AI"
             >
@@ -93,6 +95,7 @@ export const ActionPlan = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
+              aria-label={`Switch to ${tab.label}`}
               className={`px-5 py-3 text-sm font-semibold border-b-2 transition-all -mb-px ${
                 activeTab === tab.id
                   ? 'border-emerald-500 text-emerald-400'

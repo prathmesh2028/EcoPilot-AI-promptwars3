@@ -2,7 +2,7 @@
  * RecommendationCard — displays one AI-generated recommendation.
  * Props: rec { id, title, description, impact, category, saving, effort, timeframe }
  */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CheckCircle2, Circle, ChevronDown, ChevronUp } from 'lucide-react';
 
 const IMPACT_STYLES = {
@@ -24,7 +24,7 @@ const CATEGORY_DOT = {
   Lifestyle: 'bg-purple-500',
 };
 
-export const RecommendationCard = ({ rec, index }) => {
+export const RecommendationCard = ({ rec }) => {
   const [done, setDone]       = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -37,6 +37,7 @@ export const RecommendationCard = ({ rec, index }) => {
       {/* Checkbox */}
       <button
         onClick={() => setDone(v => !v)}
+        aria-label={done ? 'Mark incomplete' : 'Mark complete'}
         className="mt-0.5 shrink-0 transition-transform active:scale-90"
         title={done ? 'Mark incomplete' : 'Mark complete'}
       >
@@ -87,6 +88,7 @@ export const RecommendationCard = ({ rec, index }) => {
       {/* Expand toggle */}
       <button
         onClick={() => setExpanded(v => !v)}
+        aria-label={expanded ? 'Collapse description' : 'Expand description'}
         className="shrink-0 p-1.5 rounded-lg text-slate-600 hover:text-slate-300 hover:bg-white/5 transition-all"
       >
         {expanded

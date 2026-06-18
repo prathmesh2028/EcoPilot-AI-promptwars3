@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { calculateFootprint, getImpactLevel, getMeterValue, getComparisonStats } from '../utils/carbonCalculators';
 
 const EcoContext = createContext(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useEco = () => {
   const ctx = useContext(EcoContext);
   if (!ctx) throw new Error('useEco must be used inside <EcoProvider>');

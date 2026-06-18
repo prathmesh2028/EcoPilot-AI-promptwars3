@@ -5,7 +5,6 @@
  *   accepted  : boolean
  *   onAccept  : () => void
  */
-import React from 'react';
 import { CheckCircle2, Flame } from 'lucide-react';
 
 const IMPACT_COLORS = {
@@ -61,6 +60,7 @@ export const ChallengeCard = ({ challenge, accepted, onAccept }) => {
           <button
             onClick={onAccept}
             disabled={accepted}
+            aria-label={`Accept ${challenge.title} challenge`}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
               accepted
                 ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 cursor-default'

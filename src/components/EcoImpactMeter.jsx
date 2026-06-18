@@ -5,7 +5,7 @@
  *   total      : raw kg CO₂e for label
  *   impactLevel: { label, color } from getImpactLevel()
  */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const RADIUS  = 70;
 const CX      = 90;

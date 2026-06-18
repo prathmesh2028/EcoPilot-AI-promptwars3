@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useEco } from '../context/EcoContext';
 import { generateSustainabilityReport } from '../services/gemini';
@@ -83,7 +83,7 @@ export const Report = () => {
   const [error,      setError]      = useState(null);
   const printRef = useRef(null);
 
-  const fetchReport = async (force = false) => {
+  const fetchReport = useCallback(async (force = false) => {
     if (!userData) return;
     if (aiCache.report && !force) { setReportText(aiCache.report); return; }
     setLoading(true);
@@ -97,12 +97,12 @@ export const Report = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userData, aiCache.report, carbonMetrics, updateAiCache]);
 
   useEffect(() => { 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchReport(); 
-  }, [userData]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchReport]);
 
   if (!hasCompletedAssessment) return <Navigate to="/assessment" replace />;
 
@@ -120,6 +120,7 @@ export const Report = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => fetchReport(true)}
+            aria-label="Regenerate Report"
             disabled={loading}
             className="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-300 text-sm font-semibold text-slate-600 hover:border-slate-400 hover:bg-white transition-all disabled:opacity-50"
           >
@@ -127,6 +128,7 @@ export const Report = () => {
           </button>
           <button
             onClick={handlePrint}
+            aria-label="Export PDF"
             disabled={loading || !reportText}
             className="flex items-center gap-2 px-5 py-2 bg-slate-900 text-white rounded-full text-sm font-bold shadow-md hover:bg-slate-800 disabled:opacity-50 transition-all hover:-translate-y-0.5"
           >
@@ -160,7 +162,7 @@ export const Report = () => {
             <AlertTriangle className="h-12 w-12 text-amber-500" />
             <h3 className="text-lg font-bold text-slate-800">Generation Failed</h3>
             <p className="text-sm text-slate-500 max-w-md">{error}</p>
-            <button onClick={() => fetchReport(true)} className="mt-2 px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-slate-800 transition-colors">
+            <button onClick={() => fetchReport(true)} aria-label="Try Again" className="mt-2 px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-slate-800 transition-colors">
               Try Again
             </button>
           </div>
