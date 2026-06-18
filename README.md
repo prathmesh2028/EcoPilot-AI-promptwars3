@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://via.placeholder.com/150/059669/FFFFFF?text=EcoPilot+AI" alt="EcoPilot AI Logo" width="100" height="100" />
+  <img src="https://drive.google.com/file/d/12c6zWpL-h-MpUl230CHnCO4xJ8BFVlLb/view?usp=sharing" alt="EcoPilot AI Logo" width="100" height="100" />
   <h1>EcoPilot AI</h1>
   <p><em>Your personalized, AI-driven sustainability coach.</em></p>
 
